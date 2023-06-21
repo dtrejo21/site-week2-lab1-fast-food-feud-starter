@@ -27,9 +27,9 @@ export function App() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedRestaurant, setSelectedRestaurant] = useState("");
  
- /* const [selectedItem, setSelectedItem] = useState("");
+ const [selectedItem, setSelectedItem] = useState("");
 
-  const currentMenuItems = data.filler( (item) => {
+  const currentMenuItems = data.filter( (item) => {
     if(item.food_category === selectedCategory && 
       item.restaurant === selectedRestaurant)
     {
@@ -39,7 +39,7 @@ export function App() {
     {
       return false;
     }
-  })*/
+  })
 
   return (
     <main className="App">
@@ -121,9 +121,31 @@ export function App() {
         <div className="MenuDisplay display">
           <div className="MenuItemButtons menu-items">
             <h2 className="title">Menu Items</h2>
-            {
+            { //SOMETHING IS WRONG HERE
               //USER CODE HERE  
-            
+              currentMenuItems.map((item)=> {
+                let isChipActive;
+  
+                if(item === selectedItem)
+                {
+                  isChipActive = true;
+                }
+                else
+                {
+                  isChipActive = false;
+                }
+  
+                return (<Chip key={item.item_name}
+                              label={item.item_name}
+                              isActive={isChipActive}
+                              chipClick={
+                                () => {
+                                  console.log(`Selected item: ${item.item_name}`)
+                                  setSelectedItem(item.item_name)
+                                }
+                              }
+                              />)  
+              })
             }
 
 

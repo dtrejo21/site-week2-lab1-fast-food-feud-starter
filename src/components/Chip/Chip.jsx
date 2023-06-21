@@ -25,7 +25,7 @@ export function Chip({label = "", isActive = false, chipClick = {}}){
   }*/
 
   return (
-    <button className={buttonClassName} onClick= {chipClick}>
+    <button className={buttonClassName} onClick = {chipClick}>
       <p className="label">{label}</p>
       <span className="close" role="button" >{`X`}</span>
     </button>
