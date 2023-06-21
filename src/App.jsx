@@ -4,6 +4,7 @@ import "./App.css"
 import Header from "./components/Header/Header"
 import Instructions from "./components/Instructions/Instructions"
 import Chip from "./components/Chip/Chip"
+import { useState } from "react"
 
 // don't move this!
 export const appInfo = {
@@ -22,7 +23,23 @@ export const appInfo = {
 // or this!
 
 export function App() {
-  const { data, categories, restaurants } = Dataset.createDataSet()
+  const { data, categories, restaurants } = Dataset.createDataSet();
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedRestaurant, setSelectedRestaurant] = useState("");
+ 
+ /* const [selectedItem, setSelectedItem] = useState("");
+
+  const currentMenuItems = data.filler( (item) => {
+    if(item.food_category === selectedCategory && 
+      item.restaurant === selectedRestaurant)
+    {
+        return true;
+    }
+    else
+    {
+      return false;
+    }
+  })*/
 
   return (
     <main className="App">
@@ -30,9 +47,30 @@ export function App() {
       <div className="CategoriesColumn col">
         <div className="categories options">
           <h2 className="title">Categories</h2>
-          {categories.map((category)=>
-            <Chip key={category}label={category}/>   
-          )
+          {
+            categories.map((category)=> {
+              let isChipActive;
+
+              if(category === selectedCategory)
+              {
+                isChipActive = true;
+              }
+              else
+              {
+                isChipActive = false;
+              }
+
+              return (<Chip key={category}
+                            label={category}
+                            isActive={isChipActive}
+                            chipClick={
+                              () => {
+                                console.log(`Selected category: ${category}`)
+                                setSelectedCategory(category)
+                              }
+                            }
+                            />)  
+            })
           }
         </div>
       </div>
@@ -46,9 +84,33 @@ export function App() {
         <div className="RestaurantsRow">
           <h2 className="title">Restaurants</h2>
           <div className="restaurants options">
-          {restaurants.map((restaurant) =>
-            <Chip key={restaurant} label={restaurant} />
-          )}
+          {
+            //restaurants.map((restaurant) => {
+
+            restaurants.map((restaurant)=> {
+              let isChipActive;
+
+              if(restaurant === selectedRestaurant)
+              {
+                isChipActive = true;
+              }
+              else
+              {
+                isChipActive = false;
+              }
+
+              return (<Chip key={restaurant}
+                            label={restaurant}
+                            isActive={isChipActive}
+                            chipClick={
+                              () => {
+                                console.log(`Selected restaurant: ${restaurant}`)
+                                setSelectedRestaurant(restaurant)
+                              }
+                            }
+                            />)  
+            })
+          }
           </div>
         </div>
 
@@ -59,7 +121,12 @@ export function App() {
         <div className="MenuDisplay display">
           <div className="MenuItemButtons menu-items">
             <h2 className="title">Menu Items</h2>
-            {/* YOUR CODE HERE */}
+            {
+              //USER CODE HERE  
+            
+            }
+
+
           </div>
 
           {/* NUTRITION FACTS */}
